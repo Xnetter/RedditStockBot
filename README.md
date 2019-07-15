@@ -1,4 +1,4 @@
-# RedditStock
+# RedditStockBot
 A python reddit bot which supplies stock information when given a ticker command.
 
 ## Instructions:
