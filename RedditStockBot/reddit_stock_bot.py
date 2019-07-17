@@ -37,8 +37,7 @@ def main():
 			comments_replied_to = [] #first time running bot
 		else: 
 			with open(comments, "r") as c_file:
-				comments_replied_to = c_file.read() #read the comments that have been already replied to
-				comments_replied_to = comments_replied_to.split("\n")
+				comments_replied_to = c_file.read().split("\n")
 				comments_replied_to = list(filter(None, comments_replied_to))
 		parse_and_reply(comments_replied_to)
 
