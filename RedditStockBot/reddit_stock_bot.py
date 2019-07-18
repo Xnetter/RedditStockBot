@@ -10,19 +10,15 @@ from rebuild import rebuild_alpha_sheet
 
 def parseForTagCommand(comment_body): #parses comments for stock tickers preceded by a ! ex: !BKS
 	tags = re.findall(r'(?<=\s!)[A-Z]{1,5}(?=[\s\W])', comment_body) #regular expression for finding stock and ignoring false data
-	tags_chunked = comment_body.split() #Regex can't find first string and last string because they do not have whitespace or characters on both sides.
-	
-	if(tags_chunked): #Checks the first and last "Word" in the comment, if they exist
+	tags_chunked = comment_body.split()
+	if(tags_chunked):
 		last = tags_chunked.pop().strip()
-		print("l " + last)
 		if(re.match(r"(!)[A-Z]{1,5}$", last)):
 			tags.append(last[1:])
 		if(tags_chunked):
 			first = tags_chunked.pop(0).strip()
-			print("f " + first)
 			if(re.match(r"(!)[A-Z]{1,5}$", first)):
 				tags.append(first[1:])
-	print(tags)
 	return tags
 
 
