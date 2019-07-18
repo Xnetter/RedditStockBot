@@ -1,4 +1,4 @@
-# RedditStockBot
+# T!ckr
 A python reddit bot which supplies stock information when given a ticker command.
 
 ## Instructions:
@@ -32,6 +32,6 @@ name). You can do this using
 ```shell
 python rebuild.py
 ```
-in your command line. Just remember to re-alphabetize the csv file once you've modified it.
+in your command line. Just remember the CSV file must be alphabetically ordered.
 
 
