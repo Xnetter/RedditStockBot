@@ -50,32 +50,32 @@ def parse_and_reply(comments_replied_to):
 		print(submission.title)
 		submission.comments.replace_more(limit=None) #resolves all "more comments" so all comments are checked.
 		for comment in submission.comments.list(): #Check every comment on the post
-				if comment.id not in comments_replied_to: #If we haven't replied to this comment
-					currentTags = list(set(parseForTagCommand(comment.body)))#find tags and remove duplicate tags in comment
-					stockObjects = []
-					for tag in currentTags:
-						stock = Stocks(tag)
-						if stock.name: #Stock only exists if it has a name
-							stockObjects.append(stock)
-					reply = ""#allows for the postage of several stocks on one comment
-					for st in stockObjects:
-						#REPLY TO COMMENT
-						reply += comment_reply_skeleton.format(
-							tag = st.tag,
-							name = st.name,
-							cp = st.price,
-							# headline = st.headline,
-							# op = st.open,
-							# cl = st.close,
-							# yh = st.year_high,
-							# yl = st.year_low,
-							# url = st.headline_hyper,
-							ytd = st.year_change)+"\n\n"
-					if(len(reply)>0):#if there are stock objects, and reply exists
-						my_reply = comment.reply(reply + bot_signature)
-						comments_replied_to.append(my_reply.id)#Ensure that the program does not reply to itself
-						print("Replying to... " + comment.body)#Command prompt
-						comments_replied_to.append(comment.id)
+			if comment.id not in comments_replied_to: #If we haven't replied to this comment
+				currentTags = list(set(parseForTagCommand(comment.body)))#find tags and remove duplicate tags in comment
+				stockObjects = []
+				for tag in currentTags:
+					stock = Stocks(tag)
+					if stock.name: #Stock only exists if it has a name
+						stockObjects.append(stock)
+				reply = ""#allows for the postage of several stocks on one comment
+				for st in stockObjects:
+					#REPLY TO COMMENT
+					reply += comment_reply_skeleton.format(
+						tag = st.tag,
+						name = st.name,
+						cp = st.price,
+						# headline = st.headline,
+						# op = st.open,
+						# cl = st.close,
+						# yh = st.year_high,
+						# yl = st.year_low,
+						# url = st.headline_hyper,
+						ytd = st.year_change)+"\n\n"
+				if(len(reply)>0):#if there are stock objects, and reply exists
+					my_reply = comment.reply(reply + bot_signature)
+					comments_replied_to.append(my_reply.id)#Ensure that the program does not reply to itself
+					print("Replying to... " + comment.body)#Command prompt
+					comments_replied_to.append(comment.id)
 		with open(comments, "w") as c_file:
 			for comment_id in comments_replied_to:
 				c_file.write(comment_id + "\n")#Log comments replied to
